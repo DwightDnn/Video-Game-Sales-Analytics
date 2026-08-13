@@ -44,15 +44,16 @@ The project follows the **CRISP-DM (Cross-Industry Standard Process for Data Min
 
 ## 📊 Project Progress
 
-- ✅ Business Understanding
-- ✅ Data Understanding
-- 🚧 Exploratory Data Analysis
-- ⬜ Data Preparation
-- ⬜ Feature Engineering
-- ⬜ Machine Learning
-- ⬜ Model Evaluation
-- ⬜ Business Recommendations
-- ⬜ Final Presentation
+- [x] Business Understanding
+- [x] Data Understanding
+- [x] Data Cleaning & Preparation
+- [x] Business Insights & Market Strategy
+- [ ] Advanced EDA & Feature Analysis 🚧
+- [ ] Feature Engineering
+- [ ] Machine Learning
+- [ ] Model Evaluation
+- [ ] Business Recommendations
+- [ ] Final Presentation
 
 ## 📁 Repository Structure
 
