@@ -132,16 +132,25 @@ Multiple regression approaches were evaluated to determine which modeling strate
 
 Both Linear Regression and optimized Lasso improved upon the baseline, but their relatively low R² values suggested that linear approaches captured only a small portion of the variation in global video game sales.
 
-### Tree-Based Model Comparison
 
-Five-fold cross-validation was used to compare several nonlinear and ensemble regression approaches.
+### Tree-Based Model Comparison
 
 | Model | Mean CV RMSE | RMSE Std. Dev. |
 |---|---:|---:|
-| **Gradient Boosting** | **1.304** | 0.132 |
+| Gradient Boosting | 1.304 | 0.132 |
 | Voting Ensemble | 1.399 | 0.092 |
 | Random Forest | 1.431 | 0.097 |
-| Extra Trees | 1.594 | **0.043** |
+| Extra Trees | 1.594 | 0.043 |
+
+### Model Performance Visualization
+
+Five-fold cross-validation was used to compare the nonlinear and ensemble regression models. Gradient Boosting achieved the lowest mean RMSE, indicating the strongest predictive performance among the evaluated models during cross-validation.
+
+![Model Comparison](images/model_comparison.png)
+
+Based on these results, **Gradient Boosting was selected for further hyperparameter optimization.**
+
+### Optimized Gradient Boosting
 
 Gradient Boosting achieved the lowest mean cross-validation RMSE and was therefore selected for hyperparameter optimization.
 
