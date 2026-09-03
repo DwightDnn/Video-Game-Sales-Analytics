@@ -94,6 +94,13 @@ This skewed distribution creates a challenging regression problem because the ex
 ![Global Sales Distribution](images/global_sales_distribution.png)
 
 ### Additional EDA Findings
+### Interpretation
+
+The distribution confirms that global video game sales are highly concentrated among lower-selling titles, while a small number of games achieve exceptionally large sales values.
+
+This extreme right skew helps explain why the regression models struggled with high-sales observations. The models were trained on a dataset dominated by lower-sales games, while the relatively rare blockbuster titles created large prediction errors.
+
+This pattern later motivated additional residual analysis and testing of a log-transformed target variable.
 ---
 
 ### 3. Data Preprocessing
