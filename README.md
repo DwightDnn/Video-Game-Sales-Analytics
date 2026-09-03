@@ -118,7 +118,55 @@ Models were evaluated using regression metrics including:
 - R²
 
 ---
+## 📊 Model Comparison
 
+Multiple regression approaches were evaluated to determine which modeling strategy best captured the relationship between the available game characteristics and global sales.
+
+### Initial Test-Set Performance
+
+| Model | MAE | RMSE | R² |
+|---|---:|---:|---:|
+| Baseline (Dummy Regressor) | 0.619 | 2.069 | 0.000 |
+| Linear Regression | 0.569 | 1.978 | 0.085 |
+| Optimized Lasso Regression | 0.548 | 1.977 | 0.086 |
+
+Both Linear Regression and optimized Lasso improved upon the baseline, but their relatively low R² values suggested that linear approaches captured only a small portion of the variation in global video game sales.
+
+### Tree-Based Model Comparison
+
+Five-fold cross-validation was used to compare several nonlinear and ensemble regression approaches.
+
+| Model | Mean CV RMSE | RMSE Std. Dev. |
+|---|---:|---:|
+| **Gradient Boosting** | **1.304** | 0.132 |
+| Voting Ensemble | 1.399 | 0.092 |
+| Random Forest | 1.431 | 0.097 |
+| Extra Trees | 1.594 | **0.043** |
+
+Gradient Boosting achieved the lowest mean cross-validation RMSE and was therefore selected for hyperparameter optimization.
+
+### Optimized Gradient Boosting
+
+GridSearchCV identified the following optimal parameters:
+
+- **Number of estimators:** 200
+- **Learning rate:** 0.10
+- **Maximum depth:** 3
+- **Minimum samples per leaf:** 3
+
+The optimized model achieved a cross-validation RMSE of **1.278**.
+
+When evaluated on the untouched test set, the optimized Gradient Boosting model produced:
+
+| Metric | Result |
+|---|---:|
+| MAE | **0.521** |
+| RMSE | **1.967** |
+| R² | **0.095** |
+
+The optimized Gradient Boosting model achieved the strongest test-set performance among the evaluated final models. However, an R² of 0.095 indicates that only approximately **9.5% of the variation in global sales** was explained by the available predictors.
+
+Further residual analysis and target transformation were therefore conducted to investigate the model's remaining prediction errors.
 ## Hyperparameter Optimization
 
 Promising models were further optimized using **GridSearchCV** and cross-validation.
