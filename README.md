@@ -79,6 +79,6 @@ The repository will be updated as each stage of the data science workflow is com
 **Dwight Dunn**
 
 Master's in Mathematics  
-Master's in Data Science — In Progress
+Master's in Data Science
 
 [LinkedIn](https://www.linkedin.com/in/dwight-dunn-b1033054/)
