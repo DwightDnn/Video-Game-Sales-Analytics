@@ -261,17 +261,21 @@ Additional information could allow machine learning models to better distinguish
 
 ---
 
+
 ## Conclusion
 
-This project demonstrates an end-to-end machine learning workflow for a real-world regression problem.
+This project demonstrates an end-to-end machine learning workflow for a real-world regression problem, progressing from business understanding and exploratory analysis through feature engineering, model comparison, hyperparameter optimization, and model diagnostics.
 
-The analysis also demonstrates that model development is not simply a process of searching for increasingly complex algorithms.
+Among the evaluated approaches, the **optimized Gradient Boosting model achieved the strongest test-set performance**, with an MAE of **0.521**, RMSE of **1.967**, and R² of **0.095**.
 
-When multiple modeling approaches fail to generalize well, it is important to investigate the **underlying data-generating problem and the predictive information contained in the available features**.
+Although Gradient Boosting outperformed the baseline and other evaluated approaches, the model explained only approximately **9.5% of the variation in global video game sales**. Additional experimentation, including a log transformation of the target variable, did not improve generalization performance.
 
-The results suggest that accurate video game sales forecasting would likely require richer game-specific and market-level information.
+Feature importance analysis provided further insight into this limitation. Although one-hot encoding expanded the dataset to 476 model features, these features originated from only four underlying predictors: **Publisher, Genre, Year, and Platform**.
 
-Therefore, the models developed in this project are best interpreted as **exploratory predictive models rather than high-accuracy forecasting systems**.
+The results therefore suggest that the primary limitation is not simply model selection or hyperparameter optimization, but the **predictive information contained in the available data**. More accurate video game sales forecasting would likely require richer game-specific and market-level variables.
+
+This project highlights an important machine learning lesson: **increasing model complexity cannot compensate for missing predictive information**. The resulting models are therefore best interpreted as exploratory predictive models rather than high-accuracy forecasting systems.
+
 
 ---
 
