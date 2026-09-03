@@ -19,6 +19,8 @@ The project is organized into five notebooks that follow the complete data scien
 5. [Feature Engineering & Machine Learning](notebooks/05_Feature_Engineering_Machine_Learning.ipynb)
 
 The notebooks progress from defining the business problem and exploring the data to generating business insights, engineering features, developing machine learning models, evaluating performance, and identifying the limitations of the available predictive data.
+
+The notebooks progress from defining the business problem and exploring the data to generating business insights, engineering features, developing machine learning models, evaluating performance, and identifying the limitations of the available predictive data.
 The notebooks progress from defining the business problem and exploring the data to generating business insights, engineering features, developing machine learning models, evaluating performance, and identifying the limitations of the available predictive data.
 Each notebook builds on the previous stage, progressing from business understanding and exploratory analysis through feature engineering, model development, evaluation, and final conclusions.
 ## Business Question
