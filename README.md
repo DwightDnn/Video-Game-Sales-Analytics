@@ -1,84 +1,232 @@
-# 🎮 Video Game Sales Analytics with Python
+# 🎮 Video Game Sales Prediction — Machine Learning Project
 
 ## Project Overview
 
-This end-to-end data science project analyzes historical video game sales to identify the factors associated with commercial success.
+This project investigates whether historical video game characteristics can be used to predict **global video game sales**.
 
-Using the **CRISP-DM framework**, the project transforms raw video game sales data into actionable business insights through data exploration, visualization, statistical analysis, and predictive modeling.
+The project follows an end-to-end data science workflow, including data cleaning, exploratory data analysis, feature engineering, preprocessing, model development, hyperparameter tuning, model evaluation, residual analysis, and feature importance analysis.
 
-The goal is to demonstrate how data science can support decisions involving product development, market strategy, platform selection, and regional marketing.
+A major finding of the project is that increasing model complexity did not substantially improve predictive performance. Further investigation suggests that the primary limitation is the **predictive information available in the dataset rather than the choice of machine learning algorithm**.
 
-## 🎯 Business Problem
+---
 
-Video game companies invest millions of dollars in developing new titles, yet predicting commercial success remains difficult.
+## Business Question
 
-This project analyzes historical sales data to identify characteristics associated with successful games and provide data-driven recommendations that can support product development and marketing decisions.
+**Can video game sales be predicted using information about a game's publisher, genre, platform, and release year?**
 
-## ❓ Business Questions
+A secondary objective was to determine which available characteristics contribute most strongly to the model's predictions.
 
-1. Which video game genres generate the highest sales?
-2. Which gaming platforms have historically been the most successful?
-3. Which publishers dominate the market?
-4. How do video game sales differ across regions?
-5. Can historical data be used to explain or predict video game sales?
+---
 
-## 🧠 Methodology
+## Dataset
 
-The project follows the **CRISP-DM (Cross-Industry Standard Process for Data Mining)** framework:
+The dataset contains historical information about video games and their sales performance.
 
-1. Business Understanding
-2. Data Understanding
-3. Data Preparation
-4. Modeling
-5. Evaluation
-6. Deployment
+The primary predictors used for modeling were:
 
-## 🛠️ Technology Stack
+- Publisher
+- Genre
+- Platform
+- Year
 
-- **Language:** Python
-- **Data Analysis:** Pandas, NumPy
-- **Visualization:** Matplotlib
-- **Machine Learning:** Scikit-learn
-- **Development:** Jupyter Notebook
-- **Version Control:** Git & GitHub
+The target variable represents video game sales.
 
-## 📊 Project Progress
+Categorical variables were transformed using **one-hot encoding**, expanding the modeling dataset to **476 processed features**.
 
-- [x] Business Understanding
-- [x] Data Understanding
-- [x] Data Cleaning & Preparation
-- [x] Business Insights & Market Strategy
-- [x] Advanced EDA & Feature Analysis
-- [x] Feature Engineering 🚧
-- [ ] Machine Learning
-- [ ] Model Evaluation
-- [ ] Business Recommendations
-- [ ] Final Presentation
+However, these 476 columns originate from only four underlying predictor variables.
 
-## 📁 Repository Structure
+---
 
-This repository will contain the complete data science workflow, including:
+## Technologies Used
 
-- Business understanding
-- Data exploration and cleaning
+- Python
+- Pandas
+- NumPy
+- Matplotlib
+- Scikit-learn
+- Jupyter Notebook
+
+---
+
+## Project Workflow
+
+### 1. Data Cleaning and Preparation
+
+The dataset was inspected and prepared for machine learning. This included handling variable types, selecting predictors and the target variable, and preparing the data for preprocessing.
+
+The data was separated into training and testing sets so that final model performance could be evaluated on previously unseen observations.
+
+---
+
+### 2. Exploratory Data Analysis
+
+Exploratory analysis was conducted to better understand:
+
+- The distribution of video game sales
+- Relationships between predictors and sales
+- Categorical distributions
+- Potential outliers
+- Skewness in the target variable
+
+The sales variable exhibited substantial right skew, with a relatively small number of games achieving extremely large sales values.
+
+---
+
+### 3. Data Preprocessing
+
+Categorical variables were converted into numerical representations using **OneHotEncoder**.
+
+Preprocessing was fitted using the training data and subsequently applied to both the training and test datasets to prevent data leakage.
+
+After encoding, the dataset contained **476 model features**.
+
+---
+
+## Machine Learning
+
+Multiple regression algorithms were evaluated to determine whether different modeling approaches could capture the relationship between game characteristics and sales.
+
+Models investigated included:
+
+- Linear Regression
+- Regularized Regression
+- Support Vector Regression
+- Random Forest Regression
+- Gradient Boosting Regression
+- Ensemble approaches
+
+Models were evaluated using regression metrics including:
+
+- Mean Absolute Error (MAE)
+- Mean Squared Error (MSE)
+- Root Mean Squared Error (RMSE)
+- R²
+
+---
+
+## Hyperparameter Optimization
+
+Promising models were further optimized using **GridSearchCV** and cross-validation.
+
+For the log-transformed Gradient Boosting model, the best parameters identified were:
+
+| Hyperparameter | Best Value |
+|---|---:|
+| Learning Rate | 0.10 |
+| Maximum Depth | 4 |
+| Minimum Samples per Leaf | 3 |
+| Number of Estimators | 300 |
+
+The best cross-validation RMSE was approximately **1.275**.
+
+---
+
+## Target Transformation
+
+Residual analysis indicated that large sales values were particularly difficult for the models to predict.
+
+Because the target distribution was strongly right-skewed, a logarithmic transformation was investigated using `TransformedTargetRegressor`.
+
+`log1p` was applied during model training, while `expm1` automatically transformed predictions back to the original sales scale.
+
+The tuned log-transformed Gradient Boosting model produced:
+
+| Metric | Test Result |
+|---|---:|
+| MSE | 4.0106 |
+| RMSE | 2.0026 |
+| R² | 0.0625 |
+
+The transformation did not improve test-set performance relative to the previous Gradient Boosting model.
+
+---
+
+## Feature Importance Analysis
+
+To understand why predictive performance remained limited, feature importance was extracted from the Gradient Boosting model.
+
+Because one-hot encoding expanded categorical variables into hundreds of binary features, the individual importance values were aggregated back to their original variables.
+
+### Aggregated Feature Importance
+
+| Feature | Importance |
+|---|---:|
+| Publisher | 49.3% |
+| Genre | 22.8% |
+| Year | 17.0% |
+| Platform | 10.9% |
+
+**Publisher was the dominant feature**, accounting for nearly half of the model's total feature importance.
+
+Feature importance represents how strongly the fitted model relied on each predictor and should not be interpreted as evidence of causation.
+
+---
+
+## Key Finding
+
+Despite preprocessing, testing multiple algorithms, ensemble modeling, hyperparameter optimization, residual analysis, and target transformation, model performance remained relatively weak.
+
+The final model explained only a small proportion of the variation in video game sales.
+
+This suggests an important machine learning lesson:
+
+> **Increasing model complexity cannot compensate for missing predictive information.**
+
+Although one-hot encoding generated 476 model features, these features originated from only four underlying variables.
+
+The primary limitation therefore appears to be the **information available in the dataset rather than simply the choice of algorithm**.
+
+---
+
+## Potential Improvements
+
+Future versions of the project could incorporate additional variables that may contain stronger predictive information, including:
+
+- Critic review scores
+- User review scores
+- Marketing expenditure
+- Game price
+- Franchise information
+- Release timing
+- Preorders
+- Promotional activity
+- Digital versus physical distribution
+- Competition at release
+- Broader market conditions
+
+Additional information could allow machine learning models to better distinguish between games with similar publishers, genres, platforms, and release years but dramatically different sales outcomes.
+
+---
+
+## Conclusion
+
+This project demonstrates an end-to-end machine learning workflow for a real-world regression problem.
+
+The analysis also demonstrates that model development is not simply a process of searching for increasingly complex algorithms.
+
+When multiple modeling approaches fail to generalize well, it is important to investigate the **underlying data-generating problem and the predictive information contained in the available features**.
+
+The results suggest that accurate video game sales forecasting would likely require richer game-specific and market-level information.
+
+Therefore, the models developed in this project are best interpreted as **exploratory predictive models rather than high-accuracy forecasting systems**.
+
+---
+
+## Skills Demonstrated
+
+- Data cleaning and preprocessing
 - Exploratory data analysis
-- Data visualizations
 - Feature engineering
-- Predictive modeling
+- One-hot encoding
+- Train/test splitting
+- Scikit-learn pipelines
+- Regression modeling
+- Ensemble machine learning
+- Cross-validation
+- Grid search hyperparameter tuning
+- Target transformation
 - Model evaluation
-- Business insights and recommendations
-
-## 📈 Project Status
-
-🚧 **In Development — August 2026**
-
-The repository will be updated as each stage of the data science workflow is completed.
-
-## 👤 Author
-
-**Dwight Dunn**
-
-Master's in Mathematics  
-Master's in Data Science
-
-[LinkedIn](https://www.linkedin.com/in/dwight-dunn-b1033054/)
+- Residual analysis
+- Feature importance
+- Diagnosing model limitations
+- Translating technical results into business conclusions
