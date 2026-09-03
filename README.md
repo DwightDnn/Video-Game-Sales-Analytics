@@ -9,7 +9,17 @@ The project follows an end-to-end data science workflow, including data cleaning
 A major finding of the project is that increasing model complexity did not substantially improve predictive performance. Further investigation suggests that the primary limitation is the **predictive information available in the dataset rather than the choice of machine learning algorithm**.
 
 ---
+## 📓 Project Notebooks
 
+The project is organized into a sequence of notebooks representing the complete data science workflow:
+
+1. [Business Understanding](notebooks/01_Business%20Understanding.ipynb)
+2. [Data Analysis](notebooks/02_Data%20Analysis.ipynb)
+3. [Business Insights & Market Strategy](notebooks/03_Business_Insights_Market_Strategy.ipynb)
+4. [Advanced EDA & Feature Analysis](notebooks/04_Advance_EDA_Feature_Analysis.ipynb)
+5. [Machine Learning](notebooks/05_Machine_Learning.ipynb)
+
+Each notebook builds on the previous stage, progressing from business understanding and exploratory analysis through feature engineering, model development, evaluation, and final conclusions.
 ## Business Question
 
 **Can video game sales be predicted using information about a game's publisher, genre, platform, and release year?**
