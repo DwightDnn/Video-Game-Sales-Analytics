@@ -203,12 +203,13 @@ The tuned log-transformed Gradient Boosting model produced:
 The transformation did not improve test-set performance relative to the previous Gradient Boosting model.
 
 ---
-
 ## Feature Importance Analysis
 
-To understand why predictive performance remained limited, feature importance was extracted from the Gradient Boosting model.
+To better understand why predictive performance remained limited, feature importance was extracted from the optimized Gradient Boosting model.
 
-Because one-hot encoding expanded categorical variables into hundreds of binary features, the individual importance values were aggregated back to their original variables.
+Because categorical variables were transformed using one-hot encoding, the original features were expanded into hundreds of individual binary features. Although the processed dataset contained **476 features**, these features originated from only four underlying predictors: **Publisher, Genre, Year, and Platform**.
+
+To improve interpretability, the importance scores of the one-hot encoded features were aggregated back to their original variables.
 
 ### Aggregated Feature Importance
 
@@ -219,10 +220,38 @@ Because one-hot encoding expanded categorical variables into hundreds of binary 
 | Year | 17.0% |
 | Platform | 10.9% |
 
-**Publisher was the dominant feature**, accounting for nearly half of the model's total feature importance.
+![Aggregated Feature Importance](images/feature_importance.png)
 
-Feature importance represents how strongly the fitted model relied on each predictor and should not be interpreted as evidence of causation.
+### Interpretation
 
+**Publisher was the dominant feature**, accounting for approximately **49.3%** of the model's total feature importance. Genre contributed approximately **22.8%**, followed by Year at **17.0%** and Platform at **10.9%**.
+
+The results show that the model relied heavily on publisher information when predicting global video game sales. However, even with Publisher representing nearly half of the model's total feature importance, the optimized Gradient Boosting model achieved an R² of only **0.095** on the test set.
+
+This combination of concentrated feature importance and relatively low predictive performance suggests that the available variables provide some useful signal but do not capture many of the factors responsible for differences in video game sales.
+
+Additionally, although one-hot encoding expanded the dataset to **476 model features**, it did not create new underlying information. The model was still attempting to predict sales primarily from only four original variables.
+
+These findings support the conclusion that further improvements in predictive performance may depend more on obtaining **additional informative features** than on increasing model complexity or continuing hyperparameter optimization.
+
+Potential additional predictors could include:
+
+- Critic review scores
+- User review scores
+- Marketing expenditure
+- Game price
+- Franchise popularity
+- Release timing
+- Promotional activity
+- Preorders
+- Digital versus physical distribution
+- Market competition at release
+
+> **Key takeaway:** Increasing the number of encoded features does not necessarily increase the amount of predictive information available to a machine learning model.
+
+Feature importance represents how strongly the fitted Gradient Boosting model relied on each available predictor and should **not** be interpreted as evidence of a causal relationship with video game sales.
+
+---
 ---
 
 ## Key Finding
