@@ -85,6 +85,15 @@ Exploratory analysis was conducted to better understand:
 
 The sales variable exhibited substantial right skew, with a relatively small number of games achieving extremely large sales values.
 
+### Global Sales Distribution
+
+The distribution of global video game sales is strongly right-skewed. Most games recorded relatively modest sales, while a small number of titles achieved exceptionally high sales.
+
+This skewed distribution creates a challenging regression problem because the extreme high-selling games are much more difficult for the models to predict accurately.
+
+![Global Sales Distribution](images/global_sales_distribution.png)
+
+### Additional EDA Findings
 ---
 
 ### 3. Data Preprocessing
