@@ -12,7 +12,7 @@ A major finding of the project is that increasing model complexity did not subst
 
 The project is organized into five notebooks that follow the complete data science workflow:
 
-1. [Business Understanding](notebooks/01_Business%20Understanding.ipynb)
+1. [Business Understanding](notebooks/01_Business_Understanding.ipynb)
 2. [Data Analysis](notebooks/02_Data_Analysis.ipynb)
 3. [Business Insights & Market Strategy](notebooks/03_Business_%20Insights_%20Market_Strategy.ipynb)
 4. [Advanced EDA & Feature Analysis](notebooks/04_Advanced_EDA_Feature_Analysis.ipynb)
